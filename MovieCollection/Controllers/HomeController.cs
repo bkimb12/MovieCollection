@@ -47,6 +47,12 @@ namespace MovieCollection.Controllers
             return View();
         }
 
+        public IActionResult MovieList()
+        {
+            var movies = movieContext.Responses.ToList();
+
+            return View(movies);
         }
+
     }
 }

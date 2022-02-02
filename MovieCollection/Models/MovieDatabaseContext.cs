@@ -11,7 +11,7 @@ namespace MovieCollection.Models
         //Constructor
         public MovieDatabaseContext(DbContextOptions<MovieDatabaseContext> options) : base (options)
         { 
-            
+            //blank
         }
 
         public DbSet<AddMovie> Responses { get; set; }
@@ -24,7 +24,7 @@ namespace MovieCollection.Models
                 new AddMovie
                 { 
                     MovieID = 1,
-                    Category = "Sports",
+                    CategoryID = 7,
                     Title = "Hoosiers",
                     Year = 1986, 
                     Director = "David Anspaugh",
@@ -36,7 +36,7 @@ namespace MovieCollection.Models
                 new AddMovie
                 {
                     MovieID = 2,
-                    Category = "Family",
+                    CategoryID = 4,
                     Title = "Encanto",
                     Year = 2021,
                     Director = "Byron Howard, Jared Bush",
@@ -48,7 +48,7 @@ namespace MovieCollection.Models
                 new AddMovie
                 {
                     MovieID = 3,
-                    Category = "Action/Adventure",
+                    CategoryID = 1,
                     Title = "Midway",
                     Year = 2019,
                     Director = "Roland Emmerich",
