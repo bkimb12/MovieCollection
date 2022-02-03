@@ -46,12 +46,21 @@ namespace MovieCollection.Controllers
         {
             ViewBag.Categorys = movieContext.Categorys.ToList();
 
-            movieContext.Add(am);
-            movieContext.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                movieContext.Add(am);
+                movieContext.SaveChanges();
 
-            return View(am);
+                return View(am);
+            }
+            else
+            {
+                ViewBag.Categorys = movieContext.Categorys.ToList();
+
+                return View();
+            }
         }
-
+        //movie list get
         [HttpGet]
         public IActionResult MovieList()
         {
@@ -61,6 +70,41 @@ namespace MovieCollection.Controllers
 
             return View(movies);
         }
+        //edit get
+        [HttpGet]
+        public IActionResult Edit (int movieid)
+        {
+            ViewBag.Categorys = movieContext.Categorys.ToList();
 
+            var EditMovie = movieContext.Responses.Single(x => x.MovieID == movieid);
+
+            return View("AddMovie", EditMovie);
+        }
+        //edit post
+        [HttpPost]
+        public IActionResult Edit (AddMovie am)
+        {
+            movieContext.Update(am);
+            movieContext.SaveChanges();
+
+            return RedirectToAction("MovieList");
+        }
+        //delete get
+        [HttpGet]
+        public IActionResult Delete (int movieid)
+        {
+            var DeleteMovie = movieContext.Responses.Single(x => x.MovieID == movieid);
+
+            return View(DeleteMovie);
+        }
+        //delete post
+        [HttpPost]
+        public IActionResult Delete (AddMovie am)
+        {
+            movieContext.Responses.Remove(am);
+            movieContext.SaveChanges();
+
+            return RedirectToAction("MovieList");
+        }
     }
 }

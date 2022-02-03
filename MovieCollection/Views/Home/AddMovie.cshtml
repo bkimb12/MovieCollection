@@ -10,6 +10,9 @@
 <!--Form to add movies with each category-->
 <div>
     <form method="post">
+
+        <div asp-validation-summary="All"></div>
+
         <label asp-for="CategoryID">Category:</label>
         <select asp-for="CategoryID">
             <option value="">Select a Category:</option>

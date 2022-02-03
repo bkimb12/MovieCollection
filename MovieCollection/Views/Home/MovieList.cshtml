@@ -4,9 +4,10 @@
 
 @model List<AddMovie>
 
+<!--Build Table-->
 <table class="table table-striped table-bordered table">
 
-    <thead>
+    <thead class="thead-dark">
         <tr>
             <td>Category</td>
             <td>Title</td>
@@ -16,9 +17,11 @@
             <td>Edited</td>
             <td>Lent To</td>
             <td>Notes</td>
+            <td>Edit</td>
+            <td>Delete</td>
         </tr>
     </thead>
-
+    <!--for each in body-->
     <tbody>
         @foreach (var x in Model)
             { 
@@ -31,6 +34,9 @@
                     <td>@x.Edited</td>
                     <td>@x.LentTo</td>
                     <td>@x.Notes</td>
+                  <!--edit+delete-->
+                    <td><a asp-controller="Home" asp-action="Edit" asp-route-movieid="@x.MovieID">Edit</a></td>
+                    <td><a asp-controller="Home" asp-action="Delete" asp-route-movieid="@x.MovieID">Delete</a></td>
 
                 </tr>
             }
