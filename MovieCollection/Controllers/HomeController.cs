@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MovieCollection.Models;
 using System;
@@ -34,22 +35,29 @@ namespace MovieCollection.Controllers
         [HttpGet]
         public IActionResult AddMovie()
         {
-            return View();
+            ViewBag.Categorys = movieContext.Categorys.ToList();
+
+            return View(); 
         }
 
         //post for add movie page
         [HttpPost]
         public IActionResult AddMovie (AddMovie am)
         {
+            ViewBag.Categorys = movieContext.Categorys.ToList();
+
             movieContext.Add(am);
             movieContext.SaveChanges();
 
-            return View();
+            return View(am);
         }
 
+        [HttpGet]
         public IActionResult MovieList()
         {
-            var movies = movieContext.Responses.ToList();
+            var movies = movieContext.Responses
+                .Include(x => x.Category)
+                .ToList();
 
             return View(movies);
         }

@@ -4,13 +4,20 @@
 
 @model MovieCollection.Models.AddMovie
 
+
 <h1>Add a Movie</h1>
 
 <!--Form to add movies with each category-->
 <div>
     <form method="post">
-        <label asp-for="Category">Category:</label>
-        <input asp-for="Category" />
+        <label asp-for="CategoryID">Category:</label>
+        <select asp-for="CategoryID">
+            <option value="">Select a Category:</option>
+            @foreach (Category c in ViewBag.Categorys)
+            { 
+                <option value="@c.CategoryID">@c.CategoryName</option>
+            }
+        </select>
 
         <br />
 
